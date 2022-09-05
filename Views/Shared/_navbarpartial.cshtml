@@ -1,0 +1,74 @@
+﻿
+
+<!-- Navigation--> 
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style='background-color:#212529'>
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index"> حرف</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link"  asp-controller="Home" asp-action="Index">الرئيسيه</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Category/Index">الفئات</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Gallary/Index">المعارض</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/Product/Index">المنتجات <i class='fa fa-product-hunt'></i></a></li>
+               
+                     <li class="nav-item">
+                               @if (User.Identity.IsAuthenticated && User.IsInRole(role: Roles.ADMIN_ROLE))
+                               {
+                                   <a class="nav-link" asp-area="" asp-controller="Bill" asp-action="DisplayAllBills" asp-route-id="">الفواتير</a>
+
+                               }
+                     </li>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole(role: Roles.CUSTOMER_ROLE))
+                    {
+                        <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index" >سلة المشتريات <i class='fa fa-shopping-cart'></i> </a></li>
+                    }
+               
+                    @if (User.Identity.IsAuthenticated && User.IsInRole(role: Roles.BUYER_ROLE))
+                               {
+                         <li class="nav-item">          
+                              <a class="nav-link" asp-area="" asp-controller="Gallary" asp-action="Dashboard" asp-route-id="">لوحة التحكم</a>
+                         </li>
+                     }
+                     <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Developers" asp-action="Index" >المطورين</a></li>
+
+                </ul>
+               
+                
+                <ul class="navbar-nav me-auto order-0 ">
+                        @if(!User.Identity.IsAuthenticated){
+                        <li class="nav-item me-1">
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="Account" asp-action="Register">انشاء حساب</a>
+                        </li>
+                        <li class="nav-item me-1">
+                            <a class="btn btn-outline-primary" asp-area="" asp-controller="Account" asp-action="LogIn">تسجيل الدخول</a>
+                        </li>
+                        }else{
+                            <li class="nav-item me-1">
+                            <a class="btn btn-outline-danger" asp-area="" asp-controller="Account" asp-action="SignOut">تسجيل الخروج</a>
+                            </li>
+                            if (User.IsInRole(role: Roles.ADMIN_ROLE)) // check if user is admin to add new admins
+                            {
+                                <li class="nav-item me-1">
+                                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Account" asp-action="AdminRegister">اضافه مشرفين</a>
+                                </li>
+                            }
+
+
+                        }
+                </ul>
+                 @if(User.Identity.IsAuthenticated)
+                    {
+                        <h2 class='text-warning m-3 user-name' >@(User.Identity.Name.ToUpper())</h2>
+                    }
+
+            </div>
+        </div>
+ </nav>
+
+
+

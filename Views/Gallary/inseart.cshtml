@@ -1,0 +1,21 @@
+﻿@using ProductGallary.TDO
+@{
+    ViewData["Title"] = "inseart";
+}
+@model GalaryCreateDTO
+<h1>اضافة معرض</h1>
+
+<form method="post" enctype="multipart/form-data" action="/Gallary/savegallary">
+  <div class="mb-3 mt-3">
+     <label>اسم المعرض:</label>
+    <input  asp-for="name" class="form-control" placeholder="ادخل اسم المعرض">
+    <span asp-validation-for="name" class="text-danger"></span>
+  </div>
+  <div class="mb-3 mt-3">
+   <label>شعار المعرض:</label>
+   <input type="file" asp-for="Logo" class="form-control" placeholder="ادخل صورة شعار المعرض ">
+    <span asp-validation-for="Logo" class="text-danger"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">حفظ المعرض </button>
+</form>
+

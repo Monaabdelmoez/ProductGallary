@@ -1,0 +1,70 @@
+﻿@model List<Product>
+@{
+    ViewData["Title"] = "Index";
+    List<Guid> Products = new List<Guid>();
+
+}
+<style>
+    .item {
+    position:relative;
+    padding-top:20px;
+    display:inline-block;
+}
+.notify-badge{
+    position: absolute;
+    right:-20px;
+    top:10px;
+    background:red;
+    text-align: center;
+    border-radius: 15px;
+    color:white;
+    padding:5px 10px;
+    font-size:20px;
+}
+</style>
+
+<h3> المنتجات </h3> <br />
+  @if (User.IsInRole(Roles.BUYER_ROLE))
+  {
+      <a class="btn btn-secondary mb-4" asp-controller="Product" asp-action="New" >اضافة منتج جديد  <i class='fa fa-plus-circle'></i></a>  
+  }
+
+<div class="container">
+    <div class="row">
+ 
+       @foreach (var item in @Model){
+            
+                    <div class="col-md-4 col-sm-12 mb-3 ">
+                        <div class='card my-shadow'>
+                        <a class="btn btn-light" asp-controller="Product" asp-action="Details" asp-route-id="@item.Id">
+                            <div class="item">
+                                @if (item.DiscountPercentage > 0)
+                                {
+                                    <span class="notify-badge">@item.DiscountPercentage %</span>
+                                }
+                                <img class="card-img-top" height="300" width="360" src="/img/ProductImages/@item.Image" alt="Card image">
+                            </div>
+                      <div class="card-body">
+                      <h4 class="card-title">أسم المنتج :  @item.Name</h4>
+                      <p class="card-text"> سعر المنتج  :@item.Price جنيه </p>
+                        @if (item.DiscountPercentage > 0)
+                        {
+                         <p class="card-text"> السعر بعد الخصم : @((item.Price )-(( item.DiscountPercentage /100)*(item.Price))) جنيه </p>
+        
+                        }
+                        <p class="card-text"> وصف المنتج :@item.Description</p>
+          
+                      </div>
+                      </a>
+
+                    </div>    
+                    </div>
+         }
+            
+      </div>
+ </div>
+<br />
+<br />
+<br />
+<br />
+

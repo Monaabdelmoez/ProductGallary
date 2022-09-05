@@ -1,0 +1,27 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3> حذف المنتج</h3>
+
+
+<div class="card">
+<img class="card-img-top" src="/Images/ProductImages/@Model.Image" alt="Card image" style="max-width:50%" >
+<div class="card-body">
+    <h5 class="card-title">@Model.Name</h5>
+    <p class="card-text"> وصف المنتج :  @Model.Description</p>
+    <p class="card-text"> السعر :  @Model.Price  </p>
+    <form>
+    <button asp-action="Index">العودة إلي كل المنتجات </button>
+    <button asp-action="ConfirmDelete"asp-route-id="@Model.Id">تأكيد حذف المنتج  </button>
+    </form>
+  </div>
+</div>
+
+
+<br />
+<br />
+<br />
+<br />
+

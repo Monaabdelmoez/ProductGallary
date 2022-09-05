@@ -1,0 +1,54 @@
+﻿@model ProductGallary.TDO.BillInfoDTO
+
+@{
+    ViewData["Title"] = "الفاتوره";
+}
+
+
+
+<div>
+    <h4 class='text-center text-info fs-5 fw-bold' >الفاتوره</h4>
+    <hr />
+    <div class='row justify-content-between  mt-2 '>
+        <p class='col-sm-6 '>رقم الفاتوره:</p>
+        <p class='col-sm-6 '>@Model.Id</p>
+    </div>
+    <div class='row justify-content-between  mt-2 '>
+        <p class='col-sm-6 '>اسم العميل:</p>
+        <p class='col-sm-6 '>@Model.userName</p>
+    </div>
+    <h2 class='text-center  mt-2 mb-3'>المنتجات</h2>
+    <div class='row justify-content-between  mt-2  mb-3'>
+            <p class='col-sm-6 '>المنتج</p>
+            <p class='col-sm-6 '>السعر</p>
+        </div>
+    @foreach (var item in @Model.products)
+    {
+        <div class='row justify-content-between  mt-2 '>
+            <p class='col-sm-6 '>@item.Name</p>
+            <p class='col-sm-6 '>@item.Price جنيه</p>
+        </div>
+    }
+
+     <div class='row justify-content-between mt-2 '>
+            <p class='col-sm-6  fs-5 fw-bold'>الأجمالى</p>
+            <p class='col-sm-6 '>@Model.Price جنيه</p>
+    </div>
+
+    <div class='row justify-content-between mt-2 '>
+            <p class='col-sm-6 '>@Model.currentTime</p>
+            <p class='col-sm-6 '>@Model.currentDate</p>
+    </div>
+
+    <button class='btn btn-success mt-4' onclick='printBill()'>طباعه الفاتوره</button>
+</div>
+<div class='mt-4 '>
+    <a asp-action="Index" asp-controller='Home'>الذهاب للصفحه الرئيسيه</a>
+</div>
+
+<script>
+    function printBill(){
+       
+        window.print()
+    }
+</script>

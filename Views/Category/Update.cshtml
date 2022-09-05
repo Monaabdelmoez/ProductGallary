@@ -1,0 +1,18 @@
+﻿
+@model Category
+@{
+    ViewData["Title"] = "تعديل الفئه";
+}
+
+
+<h1>تعديل الفئه </h1>
+
+<form method="post" asp-controller="Category" asp-action="Saveupdate" asp-route-id="@Model.Id">
+  <div class="mb-3 mt-3">
+    <label asp-for="Name">أسم الفئه </label>
+    <input  asp-for="Name" class="form-control">
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+
+  <button type="submit" class="btn btn-primary">تعديل </button>
+  </form>

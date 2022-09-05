@@ -1,0 +1,86 @@
+﻿@model ProductGallary.TDO.ApplicationUserCreateDTO
+
+@{
+    ViewData["Title"] = "صفحه تسجيل الدخول";
+}
+
+
+
+<h1 class='text-info'>صفحه انشاء الحساب</h1>
+
+
+<div class="row justify-content-center">
+    
+        <form asp-action="Register" asp-route-role='@ViewBag.Role'>
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class='row'>
+
+                <div class='col-md-6 col-sm-12'>
+
+                <div class="form-group mb-3">
+                    <label asp-for="UserName" class="control-label"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class='col-md-6 col-sm-12'>
+                <div class="form-group mb-3">
+                    <label asp-for="PhoneNumber" class="control-label"></label>
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="انشاء الحساب" class="btn btn-info form-control" />
+                </div>
+                <hr />
+                <div class='text-center'>
+                    <p class='text-info mb-2'>هل لديك حساب بالفعل؟</p>
+                    <a class='text-info' asp-action='LogIn' asp-controller='Account'>تسجيل الدخول</a>
+
+                </div>
+                <div class='text-center mt-3'>
+                     <a asp-action="Index" asp-controller="Home">العوده للشاشه الرئيسيه</a>
+                </div>
+            </div>
+
+            </div>
+
+            
+           
+        </form>
+   
+</div>
+
+
+
+    
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,46 @@
+﻿@using ProductGallary.TDO
+@model List<ProductInfoDTO> 
+@{
+    //List<Guid> products = ViewBag.PRODUCTS;
+    ViewData["Title"] = "shoppingcart";
+}
+
+
+@if(Model.Count<=0){
+    <h1 class='text-danger text-center mt-5' style='font-size:60px; font-weight:bold'>السله فارغه</h1>
+}else
+{
+    <div class='row'>
+        <h1 class='col-12'>سلة المشتريات</h1>
+        <table class="col-12' table table-responsive align-content-center  table-bordered border-info table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">اسم المنتج</th>
+                  <th scope="col">السعر</th>
+                   <th scope="col">قيمة الخصم</th>
+                   <th scope="col">صورة المنتج</th>
+            
+                   <th scope="col">الحذف</th>
+                </tr>
+               </thead>
+             <tbody>
+            @foreach (var item in @Model)
+            {
+               <tr>
+                   <td>@item.Name</td>
+                   <td>@item.Price</td>
+                   <td>@(item.DiscountPercentage==null?"لايوجد":$"{item.DiscountPercentage}%")</td>
+                   <td><img src='/Img/ProductImages/@item.Image' class='rounded-circle' style="width:50px;height:50px"/></td>
+                   <td><a  asp-controller='cart' asp-action='RemoveFromCart' asp-route-id='@item.Id' class='btn btn-danger'>حذف <i class='fa fa-trash'></i></a></td>
+               </tr>
+            }
+          </tbody>
+  
+        </table>
+          <a class='btn btn-success col-12 mt-3' asp-controller='Order' asp-action='SaveOrder'>الطلب الان</a>
+         <a class='btn btn-danger col-12 mt-3' asp-controller='Cart' asp-action='ClearCart'>تفريغ السله</a>
+    </div>
+    
+
+}
+

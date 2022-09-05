@@ -1,0 +1,73 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Update";
+   
+        SelectList CategoryItems = 
+            new SelectList(ViewBag.CategoryList,"Id","Name");
+        SelectList GallaryItems = 
+            new SelectList(ViewBag.GallaryList,"Id","Name");
+
+}
+
+<h3>تعديل المنتج </h3>
+
+<form method="post" asp-controller="Product" asp-action="Saveupdate" asp-route-id="@Model.Id">
+  <div class="mb-3 mt-3">
+    <label asp-for="Name">أسم المنتج </label>
+    <input  asp-for="Name" class="form-control">
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+
+    <div class="mb-3 mt-3">
+    <label asp-for="Image">صورة المنتج </label>
+    <input  asp-for="Image" class="form-control">
+     <span asp-validation-for="Image" class="text-danger"></span>
+  </div>
+  <div class="mb-3 mt-3">
+    <label asp-for="Price">سعر المنتج </label>
+    <input  asp-for="Price" class="form-control">
+     <span asp-validation-for="Price" class="text-danger"></span>
+  </div> 
+@*<div>
+         <label asp-for="HasDiscount" >هل هناك خصم </label>
+        @if (Model.HasDiscount == true)
+        {
+            <input name="HasDiscount" type ="checkbox" checked />
+        }
+      @if(Model.HasDiscount==false){
+            <input name="HasDiscount" type ="checkbox"  />
+        }
+        <span asp-validation-for="HasDiscount" class="text-danger"></span>
+
+</div>*@
+   
+<div >
+    <label asp-for="DiscountPercentage" >قيمة الخصم   </label>  
+    <input asp-for="DiscountPercentage"class="form-control" />      
+    <span asp-validation-for="DiscountPercentage" class="text-danger"></span>
+</div>
+    <div class="mb-3 mt-3">
+    <label asp-for="Description">وصف المنتج </label>
+    <input  asp-for="Description" class="form-control">
+     <span asp-validation-for="Description" class="text-danger"></span>
+  </div>
+
+
+  <div class="mb-3 mt-3">
+    <div>
+        <label asp-for="Category_Id">اسم الفئة  </label>
+        <select asp-items="CategoryItems" asp-for="Category_Id"  class="form-control">                    
+        </select>   
+    </div>
+  </div>
+ <div class="mb-3 mt-3">
+    <label asp-for="Gallary_Id">اسم المعرض   </label>
+    <select asp-items="GallaryItems" asp-for="Gallary_Id"  class="form-control">
+    </select>
+    
+</div>
+
+
+  <button type="submit" class="btn btn-primary">تعديل </button>
+  </form>
+

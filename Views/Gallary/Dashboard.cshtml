@@ -1,0 +1,10 @@
+﻿@using ProductGallary.TDO
+@model GalaryInfoDTO
+@{
+    ViewData["Title"] = "الداشبورد";
+}
+ 
+
+<a class="btn btn-success mb-3" asp-area="" asp-controller="Gallary" asp-action="mygallary" asp-route-id="@Model.user_id">المعارض</a>
+
+<a class="btn btn-success mb-3" asp-area="" asp-controller="Product" asp-action="modifyproducts" asp-route-id="@Model.user_id">تعديل المنتجات <i class='fa fa-edit'></i></a>

@@ -1,0 +1,113 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - حرف</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.rtl.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ProductGallary.styles.css" asp-append-version="true" />
+</head>
+<body>
+     <header class='sticky-top'>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light my-header-bg border-bottom box-shadow mb-3">
+            <div class="container">
+                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> حرف</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">الرئيسيه</a>
+                        </li>  
+
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Category" asp-action="Index">الفئات </a>
+                        </li>
+                        
+                        @if(User.Identity.IsAuthenticated&&User.IsInRole(role: Roles.ADMIN_ROLE))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-info" asp-area="" asp-controller="Category" asp-action="Index">الفئات</a>
+                            </li>
+                        }
+                         <li class="nav-item">
+                            <a class="nav-link text-info" asp-area="" asp-controller="Gallary" asp-action="index">المعارض</a>
+
+                        </li>
+                                                <li class="nav-item">
+                            <a class="nav-link text-info" asp-area="" asp-controller="Product" asp-action="Index">المنتجات</a>
+                        </li>
+                    
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-info" asp-area="" asp-controller="Cart" asp-action="Index" >سلة المشتريات </a>
+                        </li>
+                        
+                        <li>
+                               @if (User.Identity.IsAuthenticated && User.IsInRole(role: Roles.BUYER_ROLE))
+                               {
+                                   <a class="nav-link" asp-area="" asp-controller="Gallary" asp-action="Dashboard" asp-route-id="">لوحة النحكم</a>
+
+                               }
+                        </li>
+                       
+                              @* @if (User.Identity.IsAuthenticated && User.IsInRole(role: Roles.BUYER_ROLE))
+                               {
+                                   <a class="nav-link text-info" asp-area="" asp-controller="Product" asp-action="modifyproducts" asp-route-id="">تعديل المنتجات </a>
+
+                               }*@
+                        
+                    </ul>
+
+                     <ul class="navbar-nav ms-auto ">
+                         @if(!User.Identity.IsAuthenticated){
+                            <li class="nav-item m-2">
+                                <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Register">انشاء حساب</a>
+                            </li>
+                            <li class="nav-item m-2">
+                                <a class="btn btn-outline-info" asp-area="" asp-controller="Account" asp-action="LogIn">تسجيل الدخول</a>
+                            </li>
+                         }
+                         else{
+                             <li class="nav-item m-2">
+                                <a class="btn btn-outline-danger" asp-area="" asp-controller="Account" asp-action="SignOut">تسجيل الخروج</a>
+                            </li>
+                                if (User.IsInRole(role: Roles.ADMIN_ROLE)) // check if user is admin to add new admins
+                                {
+                                    <li class="nav-item m-2">
+                                        <a class="btn btn-outline-info" asp-area="" asp-controller="Account" asp-action="AdminRegister">اضافه مشرفين</a>
+                                    </li>
+                                }
+                         }
+                    </ul>
+                    @if(User.Identity.IsAuthenticated)
+                    {
+                        <h2 class='text-warning m-3 user-name' >@(User.Identity.Name.ToUpper())</h2>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+  
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - ProductGallary - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

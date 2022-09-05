@@ -1,0 +1,21 @@
+﻿
+@model Gallary
+@{
+    ViewData["Title"] = "edit";
+}
+
+<h1>edit</h1>
+
+<form method="post" asp-controller="Gallary" asp-action="update"  asp-route-id="@Model.Id">
+  <div class="mb-3 mt-3">
+     <label>اسم المعرض:</label>
+    <input  asp-for="Name" class="form-control" placeholder="ادخل اسم المعرض">
+    <span asp-validation-for="Name" class="text-danger"></span>
+  </div>
+  <div class="mb-3 mt-3">
+   <label>شعار المعرض:</label>
+   <input readonly asp-for="Logo" class="form-control" placeholder="ادخل صورة شعار المعرض ">
+    <span asp-validation-for="Logo" class="text-danger"></span>
+  </div>
+  <button type="submit" class="btn btn-primary">حفظ التعديلات </button>
+</form>
